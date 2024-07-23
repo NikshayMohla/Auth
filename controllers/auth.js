@@ -4,13 +4,13 @@ const User = require("../model/user")
 
 exports.signup = async (req, res) => {
     try {
-        const { name, email, password } = req.body
-        const existingUser = await User.find({ email })
+        const { name, email, password,role } = req.body
+        const existingUser = await User.findOne({ email })
 
         if (existingUser) {
             return res.status(400).json({
                 success: false,
-                message: `User Already Exists ${e}`
+                message: `User Already Exists `
             })
         }
         let hashedPassword;
@@ -35,7 +35,7 @@ exports.signup = async (req, res) => {
     catch (e) {
         return res.status(500).json({
             success: false,
-            message: `ERROR IN Servr ${e}`
+            message: `ERROR IN Server ${e}`
         })
     }
 }
